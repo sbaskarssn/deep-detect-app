@@ -14,7 +14,14 @@ model = None  # Lazy load on first use to avoid high memory usage at startup
 
 @app.get("/")
 def root():
-    return {"message": "YOLOv5 API is live"}
+    return {
+        "message": "Service live",
+        "cwd": os.getcwd(),
+        "files": os.listdir("."),
+        "model_file": os.path.exists("yolov5s.pt"),
+        "yolov5_hubconf": os.path.exists("yolov5/hubconf.py")
+    }
+
 
 @app.post("/detect")
 async def detect_image(file: UploadFile = File(...)):
