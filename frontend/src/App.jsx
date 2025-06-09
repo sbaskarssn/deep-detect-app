@@ -20,7 +20,7 @@ const App = () => {
 
     if (imageSrc) {
       try {
-        const response = await axios.post("http://localhost:8000/detect/", {
+        const response = await axios.post("https://deep-detect-app.onrender.com", {
           image: imageSrc,
         });
 
