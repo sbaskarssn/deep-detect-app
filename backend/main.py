@@ -38,8 +38,3 @@ async def detect_image(file: UploadFile = File(...)):
     # Parse results
     detected_objects = results.pandas().xyxy[0].to_dict(orient="records")
     return JSONResponse(content={"detections": detected_objects})
-
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.environ.get("PORT", 10000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
