@@ -15,21 +15,22 @@ const App = () => {
   }, []);
 
   const captureAndSendFrame = async () => {
-    if (!webcamRef.current) return;
-    const imageSrc = webcamRef.current.getScreenshot();
+  if (!webcamRef.current) return;
+  const imageSrc = webcamRef.current.getScreenshot();
 
-    if (imageSrc) {
-      try {
-        const response = await axios.post("https://deep-detect-app.onrender.com", {
-          image: imageSrc,
-        });
+  if (imageSrc) {
+    try {
+      const response = await axios.post("https://deep-detect-app.onrender.com/detect", {
+        image: imageSrc,
+      });
 
-        setResult(response.data); // store result in state
-      } catch (error) {
-        console.error("Error sending image to backend:", error);
-      }
+      setResult(response.data);
+    } catch (error) {
+      console.error("Error sending image to backend:", error);
     }
-  };
+  }
+};
+
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
