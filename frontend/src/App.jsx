@@ -1,17 +1,17 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
 
 const App = () => {
   const webcamRef = useRef(null);
+  const [result, setResult] = useState(null);
 
-  // Capture and send every second
   useEffect(() => {
     const interval = setInterval(() => {
       captureAndSendFrame();
-    }, 1000); // 1000 ms = 1 second
+    }, 1000);
 
-    return () => clearInterval(interval); // cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const captureAndSendFrame = async () => {
@@ -24,8 +24,7 @@ const App = () => {
           image: imageSrc,
         });
 
-        console.log("Backend response:", response.data);
-        // In next phase, use this to draw on canvas
+        setResult(response.data); // store result in state
       } catch (error) {
         console.error("Error sending image to backend:", error);
       }
@@ -47,6 +46,14 @@ const App = () => {
           facingMode: "user",
         }}
       />
+
+      <div style={{ marginTop: "20px", color: "lime" }}>
+        {result ? (
+          <pre>{JSON.stringify(result, null, 2)}</pre>
+        ) : (
+          "Waiting for response..."
+        )}
+      </div>
     </div>
   );
 };
