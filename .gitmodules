@@ -1,0 +1,3 @@
+[submodule "backend/backend/yolov5"]
+	path = backend/backend/yolov5
+	url = https://github.com/ultralytics/yolov5
