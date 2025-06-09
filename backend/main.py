@@ -7,7 +7,7 @@ import torch
 app = FastAPI()
 
 # Load model once at startup
-model = torch.hub.load('./yolov5', 'yolov5s', source='local')  # local yolov5 repo
+model = torch.hub.load('./backend/yolov5', 'yolov5s', source='local')  # local yolov5 repo
 
 @app.get("/")
 def root():
