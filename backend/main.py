@@ -22,7 +22,8 @@ async def detect_image(file: UploadFile = File(...)):
 
     # Load model only on first request
     if model is None:
-        model = torch.hub.load('yolov5', 'custom', path='backend/yolov5s.pt', source='local')
+        model = torch.hub.load('yolov5', 'custom', path='yolov5s.pt', source='local')
+
 
     # Save image temporarily
     temp_path = f"temp_{file.filename}"
